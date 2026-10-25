@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Australia's Protected Places</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+
+  <div class="website">
+
+    <!-- HEADER -->
+    <header class="hero">
+
+      
+ 
+      <div class="hero-layout">
+
+        <div class="hero-text">
+
+          <p class="overline">AUSTRALIA / NATURE / CONSERVATION</p>
+
+          <h1>
+            Australia's<br>
+            <em>Protected Places.</em>
+          </h1>
+
+          <p class="hero-subtitle">
+            Are we protecting nature where it matters?
+            Explore how protected areas are distributed,
+            how conservation coverage has changed,
+            and what threatened-species observations reveal.
+          </p>
+
+          
+
+        </div>
+
+        <div class="hero-stats">
+
+          <p class="stats-heading">CONSERVATION AT A GLANCE</p>
+
+          <div class="stat">
+            <span class="stat-number">22.57%</span>
+            <span class="stat-label">OF AUSTRALIAN LAND PROTECTED IN 2024</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-number">+12.49</span>
+            <span class="stat-label">PERCENTAGE-POINT INCREASE SINCE 2002</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-number">08</span>
+            <span class="stat-label">STATES &amp; TERRITORIES COMPARED</span>
+          </div>
+
+          <p class="stats-source">SOURCE: CAPAD 2024</p>
+
+        </div>
+
+      </div>
+
+      <div class="hero-footer">
+        <span>FIT3179 · DATA VISUALISATION 2</span>
+        <span>AN INTERACTIVE STORY</span>
+      </div>
+
+    </header>
+
+
+    <!-- INTRODUCTION -->
+    <section class="intro">
+
+      <p class="overline green">THE BIG PICTURE</p>
+
+      <h2>
+        Protection is growing.<br>
+        <em>But where does it matter?</em>
+      </h2>
+
+      <p>
+        Australia is home to diverse landscapes and threatened
+        wildlife. Protected areas are important for conservation,
+        but their coverage differs across states and territories.
+        This story examines the geography of protection,
+        threatened-species observations and changes over time.
+      </p>
+
+    </section>
+
+
+    <!-- CHAPTER 1 -->
+    <section id="chapter1" class="chapter">
+
+      <div class="chapter-heading">
+
+        <span class="chapter-number">01 / THE LAND</span>
+
+        <h2>
+          The geography<br>
+          <em>of protection.</em>
+        </h2>
+
+        <p>How much land is protected across Australia?</p>
+
+      </div>
+
+      <div class="two-columns">
+
+        <!-- CHART 1 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 01</span>
+
+          <h3>How protected is each state?</h3>
+
+          <p>
+            Percentage of land protected across states and territories.
+          </p>
+
+          <div id="state-bar-chart" class="visualisation"></div>
+
+        </article>
+
+
+        <!-- CHART 2 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 02</span>
+
+          <h3>Where is protection concentrated?</h3>
+
+          <p>
+            Explore the geographic distribution of protected land.
+          </p>
+
+          <div id="state-map" class="visualisation"></div>
+
+        </article>
+
+      </div>
+
+      <div class="insight">
+
+        <span>KEY INSIGHT</span>
+
+        <p>
+          Protected-area coverage varies considerably between
+          jurisdictions. Percentage coverage and total protected
+          area are different measures.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHAPTER 2 -->
+    <section class="chapter chapter-soft">
+
+      <div class="chapter-heading">
+
+        <span class="chapter-number">02 / THE WILDLIFE</span>
+
+        <h2>
+          Life under<br>
+          <em>pressure.</em>
+        </h2>
+
+        <p>
+          Where are threatened-species observations recorded?
+        </p>
+
+      </div>
+
+      <div class="two-columns">
+
+        <!-- CHART 3 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 03</span>
+
+          <h3>Where are threatened species recorded?</h3>
+
+          <p>
+            Occurrence records across Australian geographic cells.
+          </p>
+
+          <div id="threatened-species-map" class="visualisation"></div>
+
+        </article>
+
+
+        <!-- CHART 4 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 04</span>
+
+          <h3>How does conservation status vary?</h3>
+
+          <p>
+            Occurrence records by state and threat-status category.
+          </p>
+
+          <div id="threat-status-heatmap" class="visualisation"></div>
+
+        </article>
+
+      </div>
+
+      <div class="insight-strip">
+  <div class="insight-tag">KEY INSIGHT</div>
+  <p>
+    Threatened-species observations are concentrated in eastern and
+    southeastern Australia. NSW records particularly high observation
+    counts across threat-status categories, revealing an uneven
+    geographic distribution of recorded threatened species.
+  </p>
+</div>
+
+    </section>
+
+
+    <!-- CHAPTER 3 -->
+    <section class="chapter">
+
+      <div class="chapter-heading">
+
+        <span class="chapter-number">03 / THE FUTURE</span>
+
+        <h2>
+          Progress and<br>
+          <em>perspective.</em>
+        </h2>
+
+        <p>
+          How has protection changed, and how does it compare
+          with biodiversity records?
+        </p>
+
+      </div>
+
+      <div class="two-columns">
+
+        <!-- CHART 5 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 05</span>
+
+          <h3>Is Australia's protected land growing?</h3>
+
+          <p>
+            Protected-area coverage across selected years.
+          </p>
+
+          <div id="protected-growth-chart" class="visualisation"></div>
+
+        </article>
+
+
+        <!-- CHART 6 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 06</span>
+
+          <h3>Protection meets biodiversity</h3>
+
+          <p>
+            Larger circles represent more ALA observations;
+            darker green represents higher protected-land coverage.
+          </p>
+
+          <div id="bivariate-map" class="visualisation"></div>
+
+          <p class="small-note">
+            Circles are approximately geographically arranged.
+            This is a Dorling-style cartogram prototype.
+          </p>
+
+        </article>
+
+      </div>
+      <div class="insight-strip">
+  <div class="insight-tag">KEY INSIGHT</div>
+  <p>
+    Australia's protected-land coverage more than doubled from
+    10.1% in 2002 to 22.6% in 2024. However, threatened-species
+    observation records remain unevenly distributed, with NSW
+    recording particularly high counts. Expanding protected land
+    does not necessarily mean biodiversity observations are
+    equally distributed across states.
+  </p>
+</div>
+
+    </section>
+
+
+    <!-- CHAPTER 4 -->
+    <section id="section4" class="chapter chapter-soft">
+
+      <div class="chapter-heading">
+
+        <span class="chapter-number">
+          04 / BIODIVERSITY HOTSPOTS
+        </span>
+
+        <h2>
+          Mapping threatened<br>
+          <em>species hotspots.</em>
+        </h2>
+
+        <p>
+          Exploring geographic patterns in threatened-species
+          observation records across Australia.
+        </p>
+
+      </div>
+
+      <div class="two-columns">
+
+        <!-- CHART 7 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 07</span>
+
+          <h3>
+            Where are threatened-species observations concentrated?
+          </h3>
+
+          
+
+          <div id="hexbin-map" class="visualisation"></div>
+
+          
+
+        </article>
+
+
+        <!-- CHART 8 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 08</span>
+
+          <h3>
+            Which management categories protect the most land?
+          </h3>
+
+          <p>
+            This treemap compares the land area protected under
+            different IUCN management categories across Australia.
+            Larger rectangles represent greater protected area.
+          </p>
+
+          <div id="chart8" class="visualisation"></div>
+
+          <p class="small-note">
+            IUCN Category VI accounts for approximately 57.6% of
+            Australia's terrestrial protected-area coverage,
+            followed by Category II at 22.8%. Source: CAPAD 2024.
+          </p>
+
+        </article>
+
+      </div>
+
+      <div class="insight-strip">
+  <div class="insight-tag">KEY INSIGHT</div>
+  <p>
+    Threatened-species observation records are unevenly distributed
+    across Australia, with noticeable concentrations in eastern and
+    southeastern regions. Meanwhile, IUCN Category VI accounts for
+    approximately 57.6% of Australia's terrestrial protected-area
+    coverage, showing that sustainable-use protected areas make up
+    the largest share of the conservation network.
+  </p>
+</div>
+
+    </section>
+
+
+    <!-- CHAPTER 5 -->
+    <section id="section5" class="chapter">
+
+      <div class="chapter-heading">
+
+        <span class="chapter-number">
+          05 / CONSERVATION MANAGEMENT
+        </span>
+
+        <h2>
+          Beyond the borders.<br>
+          <em>Inside the bioregions.</em>
+        </h2>
+
+        <p>
+          How do conservation management priorities differ
+          across Australia's ecological regions?
+        </p>
+
+      </div>
+
+      <div class="two-columns">
+
+        <!-- CHART 9 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 09</span>
+
+          <h3>
+            How do management profiles differ across bioregions?
+          </h3>
+
+          <p>
+            Each line represents a bioregion, connecting the
+            percentage of its protected land assigned to
+            different IUCN management categories.
+          </p>
+
+          <div id="chart9" class="visualisation"></div>
+
+          <p class="small-note">
+            The chart compares 20 Australian bioregions with
+            the largest protected areas. 
+          </p>
+
+        </article>
+
+
+        <!-- CHART 10 -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 10</span>
+
+          <h3>
+            How does protected land flow across management categories?
+          </h3>
+
+          <p>
+            This Sankey diagram connects Australian states and
+            territories to IUCN management categories. Wider
+            flows represent larger protected areas.
+          </p>
+
+          <div id="chart10" class="visualisation"></div>
+
+          <p class="small-note">
+            Flows represent recorded
+            protected area in hectares, not the number of reserves.
+          </p>
+
+    
+      </article>
+
+    </div> <!-- End of two-columns -->
+
+    <div class="insight-strip">
+      <div class="insight-tag">KEY INSIGHT</div>
+      <p>
+        Management approaches vary considerably across Australian bioregions,
+        with Category VI dominating many areas. Protected land is also
+        unevenly distributed across states and management categories.
+      </p>
+    </div>
+
+  </section>
+
+
+    
+
+    </section>
+
+
+    <!-- CHAPTER 6 -->
+    <section id="section6" class="chapter chapter-soft">
+
+      <div class="chapter-heading">
+
+        <span class="chapter-number">
+          06 / THE CHANGING SHAPE OF CONSERVATION
+        </span>
+
+        <h2>
+          A changing conservation<br>
+          <em>landscape.</em>
+        </h2>
+
+        <p>
+          Exploring differences in protected-land coverage
+          and changes in conservation over time.
+        </p>
+
+      </div>
+
+      <div class="two-columns">
+
+        <!-- CHART 11: POLAR AREA CHART -->
+        <article class="chart-card">
+
+          <span class="figure-label">FIGURE 11</span>
+
+          <h3>
+            How does protected-land coverage vary across Australia?
+          </h3>
+
+          <p>
+            This polar area chart compares the percentage of land
+            protected across Australia's eight states and territories.
+            Each sector represents a jurisdiction, with sector area
+            representing its protected-land percentage.
+          </p>
+
+          <div id="chart11" class="visualisation"></div>
+
+          
+
+        </article>
+
+
+        
+
+<!-- CHART 12: BUMP CHART -->
+<article class="chart-card">
+
+  <span class="figure-label">FIGURE 12</span>
+
+  <h3>
+    Which conservation categories have changed in rank?
+  </h3>
+
+  <p>
+    This bump chart ranks the seven IUCN management categories
+    by protected land area across six historical years.
+    Rank 1 represents the category protecting the most land.
+  </p>
+
+  <div id="chart12" class="visualisation"></div>
+
+  
+
+</article>
+</div> 
+<div class="insight-strip">
+  <div class="insight-tag">KEY INSIGHT</div>
+  <p>
+    Protected-land coverage differs significantly across Australian
+    states and territories, while IUCN management categories have
+    changed rankings over time, highlighting shifts in Australia's
+    conservation priorities.
+  </p>
+</div>
+
+
+<!-- End of charts and insight -->
+
+
+    </section>
+
+
+    <!-- CONCLUSION -->
+    <section class="conclusion">
+
+      <p class="overline">THE TAKEAWAY</p>
+
+      <h2>
+        Protecting more land<br>
+        <em>is only the beginning.</em>
+      </h2>
+
+      <p>
+        Australia's protected-area network has expanded,
+        but its distribution differs across jurisdictions.
+        Threatened-species observations offer an additional
+        perspective, while highlighting the need for careful
+        interpretation of biodiversity data.
+      </p>
+
+    </section>
+
+
+    <!-- DATA SOURCES -->
+    <section id="sources" class="sources">
+
+      <p class="overline green">
+        BEHIND THE VISUALISATION
+      </p>
+
+      <h2>Data &amp; Methodology</h2>
+
+      <div class="source-columns">
+
+        <div>
+
+          <h3>Protected areas</h3>
+
+          <p>
+            Collaborative Australian Protected Areas Database
+            (CAPAD), Australian Government.
+          </p>
+
+        </div>
+
+        <div>
+
+          <h3>Biodiversity records</h3>
+
+          <p>
+            Atlas of Living Australia (ALA),
+            threatened-species occurrence records.
+          </p>
+
+        </div>
+
+      </div>
+
+<!-- AI ACKNOWLEDGEMENT -->
+<section id="ai-acknowledgement" class="chapter chapter-soft">
+
+  <div class="chapter-heading">
+    <span class="chapter-number">AI ACKNOWLEDGEMENT</span>
+    
+  </div>
+
+  <p>
+    I used ChatGPT (OpenAI) as a supporting tool throughout the
+    development of this data visualisation project. It assisted
+    me with writing and debugging HTML, CSS, JavaScript, and
+    Vega-Lite/Vega code, resolving technical issues, and improving
+    the layout and functionality of my website.
+  </p>
+
+  <p>
+    I also used AI to refine sentence structure, improve clarity
+    and grammar, and communicate chart descriptions and insights
+    more effectively.
+  </p>
+
+  <p>
+    AI was used to support the development process, while the
+    final visualisation choices, content, and presentation were
+    reviewed and refined by me.
+  </p>
+
+</section>
+<!-- AUTHOR METADATA -->
+<div class="author-metadata">
+  <p><strong>Author:</strong> Vimasha Silva</p>
+  <p><strong>Date:</strong> 26 October 2026</p>
+</div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+      <span>AUSTRALIA'S PROTECTED PLACES</span>
+      <span>FIT3179 · DATA VISUALISATION 2</span>
+    </footer>
+
+  </div>
+
+  <!-- VEGA VISUALISATIONS -->
+  <script src="js/vega_lite_vis.js"></script>
+
+</body>
+</html>

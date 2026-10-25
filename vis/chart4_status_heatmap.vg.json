@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 310,
+  "height": 300,
+  "data": {
+    "url": "../data/threatened_species_state_status.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 2,
+    "cornerRadius": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "status",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Vulnerable",
+        "Endangered",
+        "Critically Endangered"
+      ],
+      "axis": {
+        "labelAngle": -25,
+        "labelFontSize": 9,
+        "labelLimit": 120
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "NT",
+        "ACT"
+      ]
+    },
+    "color": {
+      "field": "occurrence_count",
+      "type": "quantitative",
+      "title": "Observations",
+      "scale": {
+        "scheme": "yellowgreenblue"
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 180
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State/Territory"
+      },
+      {
+        "field": "status",
+        "type": "nominal",
+        "title": "Conservation Status"
+      },
+      {
+        "field": "occurrence_count",
+        "type": "quantitative",
+        "title": "Observations",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34",
+      "gridColor": "#e6ebe5"
+    },
+    "legend": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34"
+    }
+  }
+}

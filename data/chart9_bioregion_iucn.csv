@@ -1,0 +1,141 @@
+bioregion,category,area_ha,share_pct,total_protected_ha
+Great Sandy Desert,Ia,17733.41,0.09,19709622.34
+Great Sandy Desert,Ib,0.0,0.0,19709622.34
+Great Sandy Desert,II,1384057.12,7.022,19709622.34
+Great Sandy Desert,III,594015.75,3.014,19709622.34
+Great Sandy Desert,IV,1597253.93,8.104,19709622.34
+Great Sandy Desert,V,16796.57,0.085,19709622.34
+Great Sandy Desert,VI,16099765.57,81.685,19709622.34
+Great Victoria Desert,Ia,3591100.47,19.784,18151680.41
+Great Victoria Desert,Ib,493163.35,2.717,18151680.41
+Great Victoria Desert,II,2202.69,0.012,18151680.41
+Great Victoria Desert,III,15252.92,0.084,18151680.41
+Great Victoria Desert,IV,0.0,0.0,18151680.41
+Great Victoria Desert,V,0.0,0.0,18151680.41
+Great Victoria Desert,VI,14049960.98,77.403,18151680.41
+Tanami,Ia,0.0,0.0,11608907.59
+Tanami,Ib,0.0,0.0,11608907.59
+Tanami,II,54402.5,0.469,11608907.59
+Tanami,III,0.0,0.0,11608907.59
+Tanami,IV,0.0,0.0,11608907.59
+Tanami,V,0.0,0.0,11608907.59
+Tanami,VI,11554505.09,99.531,11608907.59
+Nullarbor,Ia,2521332.37,23.271,10834532.24
+Nullarbor,Ib,852032.87,7.864,10834532.24
+Nullarbor,II,0.0,0.0,10834532.24
+Nullarbor,III,19964.88,0.184,10834532.24
+Nullarbor,IV,0.0,0.0,10834532.24
+Nullarbor,V,462620.65,4.27,10834532.24
+Nullarbor,VI,6978581.46,64.411,10834532.24
+Gibson Desert,Ia,1845696.03,20.222,9127291.64
+Gibson Desert,Ib,0.0,0.0,9127291.64
+Gibson Desert,II,0.0,0.0,9127291.64
+Gibson Desert,III,127524.45,1.397,9127291.64
+Gibson Desert,IV,0.0,0.0,9127291.64
+Gibson Desert,V,0.0,0.0,9127291.64
+Gibson Desert,VI,7154071.16,78.381,9127291.64
+Simpson Strzelecki Dunefields,Ia,753138.97,8.716,8640901.57
+Simpson Strzelecki Dunefields,Ib,0.0,0.0,8640901.57
+Simpson Strzelecki Dunefields,II,1817512.84,21.034,8640901.57
+Simpson Strzelecki Dunefields,III,396.06,0.005,8640901.57
+Simpson Strzelecki Dunefields,IV,302901.4,3.505,8640901.57
+Simpson Strzelecki Dunefields,V,0.0,0.0,8640901.57
+Simpson Strzelecki Dunefields,VI,5766952.31,66.74,8640901.57
+Central Ranges,Ia,0.0,0.0,8265172.55
+Central Ranges,Ib,0.0,0.0,8265172.55
+Central Ranges,II,0.0,0.0,8265172.55
+Central Ranges,III,0.0,0.0,8265172.55
+Central Ranges,IV,0.0,0.0,8265172.55
+Central Ranges,V,0.0,0.0,8265172.55
+Central Ranges,VI,8265172.55,100.0,8265172.55
+Little Sandy Desert,Ia,0.0,0.0,5250145.02
+Little Sandy Desert,Ib,0.0,0.0,5250145.02
+Little Sandy Desert,II,514038.09,9.791,5250145.02
+Little Sandy Desert,III,386106.44,7.354,5250145.02
+Little Sandy Desert,IV,0.0,0.0,5250145.02
+Little Sandy Desert,V,0.0,0.0,5250145.02
+Little Sandy Desert,VI,4350000.49,82.855,5250145.02
+Northern Kimberley,Ia,4520.3,0.087,5199177.57
+Northern Kimberley,Ib,0.0,0.0,5199177.57
+Northern Kimberley,II,1517386.5,29.185,5199177.57
+Northern Kimberley,III,0.0,0.0,5199177.57
+Northern Kimberley,IV,0.0,0.0,5199177.57
+Northern Kimberley,V,1176270.01,22.624,5199177.57
+Northern Kimberley,VI,2501000.76,48.104,5199177.57
+Coolgardie,Ia,984436.8,20.267,4857338.07
+Coolgardie,Ib,0.0,0.0,4857338.07
+Coolgardie,II,564226.85,11.616,4857338.07
+Coolgardie,III,0.0,0.0,4857338.07
+Coolgardie,IV,0.0,0.0,4857338.07
+Coolgardie,V,0.0,0.0,4857338.07
+Coolgardie,VI,3308674.42,68.117,4857338.07
+Cape York Peninsula,Ia,0.0,0.0,4752326.35
+Cape York Peninsula,Ib,0.0,0.0,4752326.35
+Cape York Peninsula,II,3158123.77,66.454,4752326.35
+Cape York Peninsula,III,66.25,0.001,4752326.35
+Cape York Peninsula,IV,160685.44,3.381,4752326.35
+Cape York Peninsula,V,182875.55,3.848,4752326.35
+Cape York Peninsula,VI,1250575.33,26.315,4752326.35
+Murray Darling Depression,Ia,680997.56,19.608,3473087.7
+Murray Darling Depression,Ib,404689.03,11.652,3473087.7
+Murray Darling Depression,II,1510097.47,43.48,3473087.7
+Murray Darling Depression,III,548744.48,15.8,3473087.7
+Murray Darling Depression,IV,188277.32,5.421,3473087.7
+Murray Darling Depression,V,30720.43,0.885,3473087.7
+Murray Darling Depression,VI,109561.42,3.155,3473087.7
+Channel Country,Ia,0.0,0.0,3357358.94
+Channel Country,Ib,11777.85,0.351,3357358.94
+Channel Country,II,939272.62,27.977,3357358.94
+Channel Country,III,1228.71,0.037,3357358.94
+Channel Country,IV,203043.55,6.048,3357358.94
+Channel Country,V,0.0,0.0,3357358.94
+Channel Country,VI,2202036.21,65.588,3357358.94
+Gascoyne,Ia,454525.13,15.625,2908907.66
+Gascoyne,Ib,0.0,0.0,2908907.66
+Gascoyne,II,1611608.2,55.403,2908907.66
+Gascoyne,III,52731.62,1.813,2908907.66
+Gascoyne,IV,0.0,0.0,2908907.66
+Gascoyne,V,12.25,0.0,2908907.66
+Gascoyne,VI,790030.46,27.159,2908907.66
+Gulf Fall and Uplands,Ia,0.0,0.0,2890527.58
+Gulf Fall and Uplands,Ib,0.0,0.0,2890527.58
+Gulf Fall and Uplands,II,308391.29,10.669,2890527.58
+Gulf Fall and Uplands,III,0.0,0.0,2890527.58
+Gulf Fall and Uplands,IV,0.0,0.0,2890527.58
+Gulf Fall and Uplands,V,670946.21,23.212,2890527.58
+Gulf Fall and Uplands,VI,1911190.08,66.119,2890527.58
+Central Kimberley,Ia,0.0,0.0,2385269.59
+Central Kimberley,Ib,0.0,0.0,2385269.59
+Central Kimberley,II,1166490.73,48.904,2385269.59
+Central Kimberley,III,0.0,0.0,2385269.59
+Central Kimberley,IV,0.0,0.0,2385269.59
+Central Kimberley,V,495953.59,20.792,2385269.59
+Central Kimberley,VI,722825.27,30.304,2385269.59
+Mallee,Ia,1107573.97,46.994,2356860.62
+Mallee,Ib,0.0,0.0,2356860.62
+Mallee,II,226491.45,9.61,2356860.62
+Mallee,III,0.0,0.0,2356860.62
+Mallee,IV,1264.35,0.054,2356860.62
+Mallee,V,724.88,0.031,2356860.62
+Mallee,VI,1020805.96,43.312,2356860.62
+Murchison,Ia,286448.04,14.558,1967617.74
+Murchison,Ib,0.0,0.0,1967617.74
+Murchison,II,1663718.02,84.555,1967617.74
+Murchison,III,0.0,0.0,1967617.74
+Murchison,IV,0.0,0.0,1967617.74
+Murchison,V,4221.38,0.215,1967617.74
+Murchison,VI,13230.3,0.672,1967617.74
+Gawler,Ia,234062.46,11.918,1963876.22
+Gawler,Ib,9813.76,0.5,1963876.22
+Gawler,II,221044.15,11.256,1963876.22
+Gawler,III,39377.79,2.005,1963876.22
+Gawler,IV,0.0,0.0,1963876.22
+Gawler,V,0.0,0.0,1963876.22
+Gawler,VI,1459578.06,74.321,1963876.22
+Arnhem Coast,Ia,0.0,0.0,1809069.23
+Arnhem Coast,Ib,0.0,0.0,1809069.23
+Arnhem Coast,II,0.0,0.0,1809069.23
+Arnhem Coast,III,0.0,0.0,1809069.23
+Arnhem Coast,IV,0.0,0.0,1809069.23
+Arnhem Coast,V,475481.2,26.283,1809069.23
+Arnhem Coast,VI,1333588.03,73.717,1809069.23

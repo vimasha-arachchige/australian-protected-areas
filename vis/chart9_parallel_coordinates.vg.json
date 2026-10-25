@@ -1,0 +1,84 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Parallel coordinates showing IUCN management-category shares across Australian bioregions.",
+  "width": 350,
+  "height": 350,
+  "data": {
+    "url": "data/chart9_bioregion_iucn.csv"
+  },
+  "transform": [
+    {
+      "filter": "indexof(['Ia', 'Ib', 'II', 'III', 'IV', 'V', 'VI'], datum.category) >= 0"
+    },
+    {
+      "calculate": "toNumber(datum.share_pct)",
+      "as": "percentage"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 2,
+    "opacity": 0.65,
+    "point": {
+      "filled": true,
+      "size": 28
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "category",
+      "type": "ordinal",
+      "sort": ["Ia", "Ib", "II", "III", "IV", "V", "VI"],
+      "title": "IUCN management category",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Share of protected land (%)",
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "detail": {
+      "field": "bioregion",
+      "type": "nominal"
+    },
+    "color": {
+      "value": "#397c58"
+    },
+    "tooltip": [
+      {
+        "field": "bioregion",
+        "type": "nominal",
+        "title": "Bioregion"
+      },
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "IUCN category"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Protected land (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#315442",
+      "titleColor": "#315442",
+      "gridColor": "#e5ece3",
+      "domain": false
+    }
+  }
+}

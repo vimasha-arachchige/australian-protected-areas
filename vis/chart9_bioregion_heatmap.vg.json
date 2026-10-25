@@ -1,0 +1,100 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "IUCN management category composition across the 20 Australian bioregions with the largest protected areas.",
+  "width": 310,
+  "height": 440,
+  "data": {
+    "url": "data/chart9_bioregion_iucn.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "category",
+      "type": "ordinal",
+      "sort": ["Ia", "Ib", "II", "III", "IV", "V", "VI"],
+      "title": "IUCN category",
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 11
+      }
+    },
+    "y": {
+      "field": "bioregion",
+      "type": "nominal",
+      "sort": {
+        "field": "total_protected_ha",
+        "op": "max",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {
+        "labelFontSize": 9,
+        "labelLimit": 125
+      }
+    },
+    "color": {
+      "field": "share_pct",
+      "type": "quantitative",
+      "title": "Share of bioregion's protected land (%)",
+      "scale": {
+        "domain": [0, 100],
+        "range": [
+          "#eef2e5",
+          "#c4d9af",
+          "#83b585",
+          "#45845e",
+          "#164c38"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "gradientLength": 180
+      }
+    },
+    "tooltip": [
+      {
+        "field": "bioregion",
+        "type": "nominal",
+        "title": "Bioregion"
+      },
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "IUCN category"
+      },
+      {
+        "field": "share_pct",
+        "type": "quantitative",
+        "title": "Share (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "area_ha",
+        "type": "quantitative",
+        "title": "Protected hectares",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "tickColor": "#d7e2d5",
+      "labelColor": "#315442",
+      "titleColor": "#214b38"
+    },
+    "legend": {
+      "labelColor": "#315442",
+      "titleColor": "#214b38"
+    }
+  }
+}

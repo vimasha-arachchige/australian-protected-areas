@@ -1,0 +1,105 @@
+
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Percentage of protected land by Australian state and territory, CAPAD 2024.",
+  "data": {
+    "url": "data/state_protection.csv"
+  },
+  "width": 365,
+  "height": 340,
+  "encoding": {
+    "y": {
+      "field": "jurisdiction",
+      "type": "nominal",
+      "sort": {
+        "field": "percent_protected",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {
+        "labelFontSize": 12,
+        "labelFontWeight": "bold",
+        "labelColor": "#244b36",
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "x": {
+      "field": "percent_protected",
+      "type": "quantitative",
+      "title": "Protected land (%)",
+      "scale": {
+        "domain": [0, 65]
+      },
+      "axis": {
+        "grid": true,
+        "gridColor": "#e1e8df",
+        "tickCount": 6,
+        "labelColor": "#244b36",
+        "titleColor": "#244b36"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#9dbca6",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x2": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 180,
+        "color": "#246b4b",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "jurisdiction",
+            "type": "nominal",
+            "title": "State / Territory"
+          },
+          {
+            "field": "percent_protected",
+            "type": "quantitative",
+            "title": "Protected land (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#244b36"
+      },
+      "encoding": {
+        "text": {
+          "field": "percent_protected",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    }
+  }
+}

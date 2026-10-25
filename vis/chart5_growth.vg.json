@@ -1,0 +1,188 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 335,
+  "height": 300,
+  "data": {
+    "url": "../data/protected_area_growth.csv"
+  },
+  "transform": [
+    {
+      "calculate": "format(datum.percent_protected, '.1f') + '%'",
+      "as": "percent_label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "CAPAD edition",
+      "scale": {
+        "domain": [
+          2001,
+          2025
+        ]
+      },
+      "axis": {
+        "format": "d",
+        "values": [
+          2002,
+          2008,
+          2014,
+          2022,
+          2024
+        ],
+        "labelAngle": -30
+      }
+    },
+    "y": {
+      "field": "percent_protected",
+      "type": "quantitative",
+      "title": "Protected land (%)",
+      "scale": {
+        "domain": [
+          0,
+          32
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "color": "#8fb59b",
+        "opacity": 0.25
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#214e34",
+        "strokeWidth": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "color": "#214e34",
+        "size": 85,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "CAPAD Edition",
+            "format": "d"
+          },
+          {
+            "field": "percent_protected",
+            "type": "quantitative",
+            "title": "Protected (%)",
+            "format": ".2f"
+          },
+          {
+            "field": "protected_area_million_ha",
+            "type": "quantitative",
+            "title": "Protected area (million ha)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -13,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#214e34"
+      },
+      "encoding": {
+        "text": {
+          "field": "percent_label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "target": 30
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          5,
+          5
+        ],
+        "strokeWidth": 2,
+        "color": "#8b5e3c"
+      },
+      "encoding": {
+        "y": {
+          "field": "target",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2002,
+            "target": 30,
+            "label": "30% target"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -8,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#8b5e3c"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "target",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34",
+      "gridColor": "#e6ebe5"
+    },
+    "legend": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34"
+    }
+  }
+}

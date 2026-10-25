@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 420,
+  "height": 330,
+  "data": {
+    "url": "../data/threatened_species_state_status.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "occurrence_count": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "occurrence_count",
+          "as": "total_observations"
+        }
+      ],
+      "groupby": [
+        "state"
+      ]
+    },
+    {
+      "lookup": "state",
+      "from": {
+        "data": {
+          "url": "../data/state_protection.csv",
+          "format": {
+            "type": "csv",
+            "parse": {
+              "percent_protected": "number"
+            }
+          }
+        },
+        "key": "jurisdiction",
+        "fields": [
+          "percent_protected"
+        ]
+      }
+    },
+    {
+      "calculate": "datum.state == 'WA' ? 1 : datum.state == 'NT' ? 3 : datum.state == 'SA' ? 3.2 : datum.state == 'QLD' ? 5.5 : datum.state == 'NSW' ? 5.8 : datum.state == 'VIC' ? 5 : datum.state == 'TAS' ? 5.8 : 7",
+      "as": "xpos"
+    },
+    {
+      "calculate": "datum.state == 'WA' ? 3 : datum.state == 'NT' ? 1.2 : datum.state == 'SA' ? 3.8 : datum.state == 'QLD' ? 1.5 : datum.state == 'NSW' ? 3.5 : datum.state == 'VIC' ? 5.6 : datum.state == 'TAS' ? 7.2 : 4.5",
+      "as": "ypos"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "xpos",
+      "type": "quantitative",
+      "axis": null,
+      "scale": {
+        "domain": [
+          -1,
+          9
+        ]
+      }
+    },
+    "y": {
+      "field": "ypos",
+      "type": "quantitative",
+      "axis": null,
+      "scale": {
+        "domain": [
+          -1,
+          9
+        ],
+        "reverse": true
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.95,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "size": {
+          "field": "total_observations",
+          "type": "quantitative",
+          "title": "ALA observations",
+          "scale": {
+            "range": [
+              350,
+              4500
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolCount": 3
+          }
+        },
+        "color": {
+          "field": "percent_protected",
+          "type": "quantitative",
+          "title": "Protected land (%)",
+          "scale": {
+            "domain": [
+              0,
+              60
+            ],
+            "scheme": "greens"
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 180
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State/Territory"
+          },
+          {
+            "field": "total_observations",
+            "type": "quantitative",
+            "title": "ALA observations",
+            "format": ","
+          },
+          {
+            "field": "percent_protected",
+            "type": "quantitative",
+            "title": "Protected land (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#173b2a"
+      },
+      "encoding": {
+        "text": {
+          "field": "state",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34",
+      "gridColor": "#e6ebe5"
+    },
+    "legend": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34"
+    }
+  }
+}

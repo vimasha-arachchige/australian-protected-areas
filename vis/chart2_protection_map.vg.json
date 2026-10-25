@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 350,
+  "height": 310,
+  "data": {
+    "url": "../data/australia_states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "upper(datum.properties.code)",
+      "as": "jurisdiction"
+    },
+    {
+      "lookup": "jurisdiction",
+      "from": {
+        "data": {
+          "url": "../data/state_protection.csv"
+        },
+        "key": "jurisdiction",
+        "fields": [
+          "percent_protected",
+          "protected_area_count"
+        ]
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28
+    ],
+    "scale": 355,
+    "translate": [
+      175,
+      155
+    ]
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#ffffff",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "shape": {
+      "field": "geometry",
+      "type": "geojson"
+    },
+    "color": {
+      "field": "percent_protected",
+      "type": "quantitative",
+      "title": "Protected (%)",
+      "scale": {
+        "scheme": "greens"
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 180
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.name",
+        "type": "nominal",
+        "title": "State/Territory"
+      },
+      {
+        "field": "percent_protected",
+        "type": "quantitative",
+        "title": "Protected (%)",
+        "format": ".2f"
+      },
+      {
+        "field": "protected_area_count",
+        "type": "quantitative",
+        "title": "Protected Areas",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34",
+      "gridColor": "#e6ebe5"
+    },
+    "legend": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34"
+    }
+  }
+}

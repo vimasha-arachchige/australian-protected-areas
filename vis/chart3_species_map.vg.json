@@ -1,0 +1,141 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 350,
+  "height": 310,
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28
+    ],
+    "scale": 355,
+    "translate": [
+      175,
+      155
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "../data/australia_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e7ede6",
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "shape": {
+          "field": "geometry",
+          "type": "geojson"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "../data/threatened_species_grid.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.65
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "occurrence_count",
+          "type": "quantitative",
+          "title": "Observations",
+          "scale": {
+            "range": [
+              5,
+              180
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal"
+          }
+        },
+        "color": {
+          "field": "status",
+          "type": "nominal",
+          "title": "Threat status",
+          "scale": {
+            "domain": [
+              "Vulnerable",
+              "Endangered",
+              "Critically Endangered"
+            ],
+            "range": [
+              "#e6ae51",
+              "#ce7152",
+              "#873e58"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 2
+          }
+        },
+        "tooltip": [
+          {
+            "field": "status",
+            "type": "nominal",
+            "title": "Status"
+          },
+          {
+            "field": "occurrence_count",
+            "type": "quantitative",
+            "title": "Observations",
+            "format": ","
+          },
+          {
+            "field": "latitude",
+            "type": "quantitative",
+            "title": "Latitude",
+            "format": ".2f"
+          },
+          {
+            "field": "longitude",
+            "type": "quantitative",
+            "title": "Longitude",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34",
+      "gridColor": "#e6ebe5"
+    },
+    "legend": {
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "labelColor": "#36513f",
+      "titleColor": "#214e34"
+    }
+  }
+}

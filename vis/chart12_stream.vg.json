@@ -1,0 +1,181 @@
+
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart ranking IUCN management categories by protected land area from 2002 to 2024.",
+  "width": 390,
+  "height": 340,
+  "data": {
+    "url": "data/capad_iucn_historical_complete.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "protected_area_million_ha": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "protected_area_million_ha",
+          "order": "descending"
+        }
+      ],
+      "groupby": ["year"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "interpolate": "monotone",
+        "point": false
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "title": "Year",
+          "scale": {
+            "domain": [2002, 2024]
+          },
+          "axis": {
+            "values": [2002, 2004, 2008, 2014, 2022, 2024],
+            "format": "d",
+            "labelAngle": -45,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Rank by protected area",
+          "scale": {
+            "domain": [7.3, 0.7]
+          },
+          "axis": {
+            "values": [1, 2, 3, 4, 5, 6, 7],
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "title": "IUCN Category",
+          "scale": {
+            "domain": ["Ia", "Ib", "II", "III", "IV", "V", "VI"],
+            "range": [
+              "#173c2b",
+              "#285c40",
+              "#397750",
+              "#579366",
+              "#79ac7b",
+              "#a2c79b",
+              "#d1e2c4"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "columns": 4
+          }
+        },
+        "detail": {
+          "field": "category"
+        },
+        "order": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "IUCN Category"
+          },
+          {
+            "field": "rank",
+            "type": "quantitative",
+            "title": "Rank"
+          },
+          {
+            "field": "protected_area_million_ha",
+            "type": "quantitative",
+            "title": "Protected area (million ha)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 85,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "format": "d"
+          },
+          {
+            "field": "category"
+          },
+          {
+            "field": "rank"
+          },
+          {
+            "field": "protected_area_million_ha",
+            "title": "Million hectares",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#204832",
+      "titleColor": "#204832",
+      "gridColor": "#e1e9df"
+    },
+    "legend": {
+      "labelColor": "#204832",
+      "titleColor": "#204832"
+    }
+  }
+}

@@ -1,0 +1,265 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Proportional Sankey of Australian protected area by state and IUCN management category, CAPAD 2024.",
+  "width": 440,
+  "height": 420,
+  "padding": {"left": 10, "right": 10, "top": 12, "bottom": 12},
+  "background": null,
+  "signals": [
+    {"name": "nodeWidth", "value": 15},
+    {"name": "rightX", "update": "width - nodeWidth"},
+    {"name": "chartHeight", "update": "height"}
+  ],
+  "data": [
+    {
+      "name": "flows",
+      "url": "data/chart10_state_iucn_flows.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "state": "string",
+          "iucn": "string",
+          "area_ha": "number"
+        }
+      },
+      "transform": [
+        {"type": "filter", "expr": "isValid(datum.area_ha) && datum.area_ha > 0"},
+        {
+          "type": "aggregate",
+          "groupby": ["state", "iucn"],
+          "fields": ["area_ha"],
+          "ops": ["sum"],
+          "as": ["value"]
+        },
+        {"type": "collect", "sort": {"field": ["state", "iucn"]}},
+        {
+          "type": "joinaggregate",
+          "ops": ["sum"],
+          "fields": ["value"],
+          "as": ["grandTotal"]
+        },
+        {
+          "type": "window",
+          "ops": ["sum"],
+          "fields": ["value"],
+          "as": ["sourceEnd"],
+          "groupby": ["state"],
+          "sort": {"field": "iucn"}
+        },
+        {
+          "type": "formula",
+          "as": "sourceStart",
+          "expr": "datum.sourceEnd - datum.value"
+        },
+        {
+          "type": "window",
+          "ops": ["sum"],
+          "fields": ["value"],
+          "as": ["targetEnd"],
+          "groupby": ["iucn"],
+          "sort": {"field": "state"}
+        },
+        {
+          "type": "formula",
+          "as": "targetStart",
+          "expr": "datum.targetEnd - datum.value"
+        }
+      ]
+    },
+    {
+      "name": "stateNodes",
+      "source": "flows",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["state"],
+          "fields": ["value"],
+          "ops": ["sum"],
+          "as": ["total"]
+        },
+        {
+          "type": "stack",
+          "field": "total",
+          "sort": {"field": "state"},
+          "as": ["y0", "y1"],
+          "offset": "zero"
+        }
+      ]
+    },
+    {
+      "name": "categoryNodes",
+      "source": "flows",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["iucn"],
+          "fields": ["value"],
+          "ops": ["sum"],
+          "as": ["total"]
+        },
+        {
+          "type": "stack",
+          "field": "total",
+          "sort": {"field": "iucn"},
+          "as": ["y0", "y1"],
+          "offset": "zero"
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "flows",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "stateNodes",
+          "key": "state",
+          "fields": ["state"],
+          "values": ["y0"],
+          "as": ["stateOffset"]
+        },
+        {
+          "type": "lookup",
+          "from": "categoryNodes",
+          "key": "iucn",
+          "fields": ["iucn"],
+          "values": ["y0"],
+          "as": ["categoryOffset"]
+        },
+        {
+          "type": "formula",
+          "as": "sy0",
+          "expr": "datum.stateOffset + datum.sourceStart"
+        },
+        {
+          "type": "formula",
+          "as": "sy1",
+          "expr": "datum.stateOffset + datum.sourceEnd"
+        },
+        {
+          "type": "formula",
+          "as": "ty0",
+          "expr": "datum.categoryOffset + datum.targetStart"
+        },
+        {
+          "type": "formula",
+          "as": "ty1",
+          "expr": "datum.categoryOffset + datum.targetEnd"
+        },
+        {
+          "type": "formula",
+          "as": "path",
+          "expr": "'M' + nodeWidth + ',' + scale('y',datum.sy0) + ' C' + width*0.42 + ',' + scale('y',datum.sy0) + ' ' + width*0.58 + ',' + scale('y',datum.ty0) + ' ' + rightX + ',' + scale('y',datum.ty0) + ' L' + rightX + ',' + scale('y',datum.ty1) + ' C' + width*0.58 + ',' + scale('y',datum.ty1) + ' ' + width*0.42 + ',' + scale('y',datum.sy1) + ' ' + nodeWidth + ',' + scale('y',datum.sy1) + ' Z'"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "linear",
+      "domain": {"data": "stateNodes", "field": "y1"},
+      "domainMin": 0,
+      "range": [0, {"signal": "chartHeight"}],
+      "zero": true,
+      "nice": false
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {"data": "links"},
+      "encode": {
+        "enter": {
+          "path": {"field": "path"},
+          "fill": {"value": "#80ab8b"},
+          "fillOpacity": {"value": 0.42},
+          "stroke": {"value": "#ffffff"},
+          "strokeWidth": {"value": 0.25},
+          "tooltip": {
+            "signal": "{'State':datum.state,'IUCN category':datum.iucn,'Protected area (ha)':format(datum.value,',.0f')}"
+          }
+        },
+        "hover": {
+          "fillOpacity": {"value": 0.85}
+        },
+        "update": {
+          "fillOpacity": {"value": 0.42}
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "stateNodes"},
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "x2": {"signal": "nodeWidth"},
+          "y": {"scale": "y", "field": "y0"},
+          "y2": {"scale": "y", "field": "y1"},
+          "fill": {"value": "#286349"},
+          "stroke": {"value": "#ffffff"},
+          "strokeWidth": {"value": 1},
+          "tooltip": {
+            "signal": "{'State':datum.state,'Protected area (ha)':format(datum.total,',.0f')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "categoryNodes"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "rightX"},
+          "x2": {"signal": "width"},
+          "y": {"scale": "y", "field": "y0"},
+          "y2": {"scale": "y", "field": "y1"},
+          "fill": {"value": "#80b187"},
+          "stroke": {"value": "#ffffff"},
+          "strokeWidth": {"value": 1},
+          "tooltip": {
+            "signal": "{'IUCN category':datum.iucn,'Protected area (ha)':format(datum.total,',.0f')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "stateNodes"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "nodeWidth + 5"},
+          "y": {"signal": "scale('y',(datum.y0+datum.y1)/2)"},
+          "text": {"field": "state"},
+          "align": {"value": "left"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"value": 10},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#173f30"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "categoryNodes"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "rightX - 5"},
+          "y": {"signal": "scale('y',(datum.y0+datum.y1)/2)"},
+          "text": {"field": "iucn"},
+          "align": {"value": "right"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"value": 10},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#173f30"}
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}
+

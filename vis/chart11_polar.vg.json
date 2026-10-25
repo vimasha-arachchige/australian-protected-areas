@@ -1,0 +1,112 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Polar area chart comparing protected land coverage across Australian states and territories in 2024.",
+  "width": 430,
+  "height": 430,
+  "data": {
+    "url": "data/state_protection.csv"
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.percent_protected)",
+      "as": "coverage"
+    },
+    {
+      "filter": "isValid(datum.coverage) && datum.coverage >= 0"
+    },
+    {
+      "window": [
+        {
+          "op": "row_number",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "jurisdiction",
+          "order": "ascending"
+        }
+      ]
+    },
+    {
+      "calculate": "(datum.rank - 1) * PI / 4",
+      "as": "start_angle"
+    },
+    {
+      "calculate": "datum.rank * PI / 4",
+      "as": "end_angle"
+    },
+    {
+      "calculate": "sqrt(datum.coverage / 100) * 180",
+      "as": "radius_value"
+    }
+  ],
+  "mark": {
+    "type": "arc",
+    "innerRadius": 0,
+    "stroke": "#ffffff",
+    "strokeWidth": 2,
+    "opacity": 0.95
+  },
+  "encoding": {
+    "theta": {
+      "field": "start_angle",
+      "type": "quantitative",
+      "scale": null
+    },
+    "theta2": {
+      "field": "end_angle"
+    },
+    "radius": {
+      "field": "radius_value",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 180],
+        "range": [0, 180]
+      }
+    },
+    "color": {
+      "field": "jurisdiction",
+      "type": "nominal",
+      "title": "State / Territory",
+      "scale": {
+        "range": [
+          "#204832",
+          "#356b4c",
+          "#52815d",
+          "#729b70",
+          "#91b18b",
+          "#b1c9a7",
+          "#d0dec5",
+          "#486e57"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "jurisdiction",
+        "type": "nominal",
+        "title": "State / Territory"
+      },
+      {
+        "field": "coverage",
+        "type": "quantitative",
+        "title": "Protected land (%)",
+        "format": ".2f"
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelColor": "#204832",
+      "titleColor": "#204832",
+      "orient": "bottom",
+      "columns": 4
+    }
+  }
+}

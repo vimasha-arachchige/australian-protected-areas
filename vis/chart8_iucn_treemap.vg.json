@@ -1,0 +1,154 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Treemap of Australian terrestrial protected areas by IUCN management category, CAPAD 2024.",
+  "width": 390,
+  "height": 320,
+  "padding": 5,
+  "autosize": "pad",
+  "background": null,
+  "data": [
+    {
+      "name": "tree",
+      "values": [
+        {"id": "Australia", "parent": null, "area": 0},
+        {"id": "Ia", "parent": "Australia", "area": 16015028.35},
+        {"id": "Ib", "parent": "Australia", "area": 3867150.88},
+        {"id": "II", "parent": "Australia", "area": 39564238.53},
+        {"id": "III", "parent": "Australia", "area": 2454996.34},
+        {"id": "IV", "parent": "Australia", "area": 4394467.13},
+        {"id": "V", "parent": "Australia", "area": 7248957.85},
+        {"id": "VI", "parent": "Australia", "area": 99937978.16},
+        {"id": "Not Applicable", "parent": "Australia", "area": 2824.97},
+        {"id": "Not Assigned", "parent": "Australia", "area": 6760.24},
+        {"id": "Not Reported", "parent": "Australia", "area": 1065.41}
+      ],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "area",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "method": "squarify",
+          "size": [
+            {"signal": "width"},
+            {"signal": "height"}
+          ],
+          "paddingInner": 3,
+          "round": true
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 1"
+        }
+      ]
+    },
+    {
+      "name": "labels",
+      "source": "leaves",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "(datum.x1 - datum.x0) > 45 && (datum.y1 - datum.y0) > 32"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": [
+        "Ia", "Ib", "II", "III", "IV", "V", "VI",
+        "Not Applicable", "Not Assigned", "Not Reported"
+      ],
+      "range": [
+        "#558a68",
+        "#8ab78c",
+        "#3f7955",
+        "#c1d8ac",
+        "#a3c79d",
+        "#75a77b",
+        "#235b42",
+        "#d8e3ce",
+        "#d8e3ce",
+        "#d8e3ce"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "scale": "colour",
+            "field": "id"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1
+          },
+          "tooltip": {
+            "signal": "{'IUCN category': datum.id, 'Protected hectares': format(datum.area, ',.0f')}"
+          }
+        },
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"}
+        },
+        "hover": {
+          "stroke": {"value": "#193d2b"},
+          "strokeWidth": {"value": 2}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "labels"
+      },
+      "encode": {
+        "enter": {
+          "text": {"field": "id"},
+          "font": {"value": "Arial"},
+          "fontSize": {"value": 15},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#ffffff"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        },
+        "update": {
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2"
+          }
+        }
+      }
+    }
+  ]
+}
+
+  
