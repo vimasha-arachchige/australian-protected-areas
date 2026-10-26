@@ -3,7 +3,7 @@
   "width": 310,
   "height": 300,
   "data": {
-    "url": "../data/threatened_species_state_status.csv"
+    "url": "https://vimasha-arachchige.github.io/australian-protected-areas/data/threatened_species_state_status.csv"
   },
   "mark": {
     "type": "rect",
