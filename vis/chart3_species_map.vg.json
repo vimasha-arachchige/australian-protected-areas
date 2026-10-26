@@ -17,7 +17,7 @@
   "layer": [
     {
       "data": {
-        "url": "../data/australia_states.geojson",
+        "url": "https://vimasha-arachchige.github.io/australian-protected-areas/data/australia_states.geojson",
         "format": {
           "type": "json",
           "property": "features"
@@ -38,7 +38,7 @@
     },
     {
       "data": {
-        "url": "../data/threatened_species_grid.csv"
+        "url": "https://vimasha-arachchige.github.io/australian-protected-areas/data/threatened_species_grid.csv"
       },
       "mark": {
         "type": "circle",
