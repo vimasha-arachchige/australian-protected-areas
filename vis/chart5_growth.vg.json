@@ -3,7 +3,7 @@
   "width": 335,
   "height": 300,
   "data": {
-    "url": "../data/protected_area_growth.csv"
+    "url": "https://vimasha-arachchige.github.io/australian-protected-areas/data/protected_area_growth.csv"
   },
   "transform": [
     {
