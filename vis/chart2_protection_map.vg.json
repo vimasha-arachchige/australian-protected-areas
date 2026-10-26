@@ -3,7 +3,7 @@
   "width": 350,
   "height": 310,
   "data": {
-    "url": "data/australia_states.geojson",
+    "url": "https://vimasha-arachchige.github.io/australian-protected-areas/data/australia_states.geojson",
     "format": {
       "type": "json",
       "property": "features"
@@ -18,7 +18,7 @@
       "lookup": "jurisdiction",
       "from": {
         "data": {
-          "url": "data/state_protection.csv"
+          "url": "https://vimasha-arachchige.github.io/australian-protected-areas/data/state_protection.csv"
         },
         "key": "jurisdiction",
         "fields": [
